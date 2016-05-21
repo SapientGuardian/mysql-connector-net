@@ -7,3 +7,11 @@ build_script:
     dotnet pack .\Source\MySql.Data -o .\artifacts\MySql.Data -c Release
 artifacts:
 - path: 'artifacts\**\*.nupkg'
+deploy:
+  provider: NuGet
+  api_key:
+    secure: aghuFgaUWlrXniLlOqTHNYg6hVzcc6ZNz5qPixX8zHI=
+  artifact: /.*\.nupkg/
+  on:
+    branch: release
+    appveyor_repo_tag: true
