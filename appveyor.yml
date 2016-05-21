@@ -3,7 +3,9 @@ image: Visual Studio 2015
 build_script:
 - cmd: >-
     move Source\MySql.Data Source\SapientGuardian.MySql.Data
+	
     dotnet restore -v Warning	
+	
     dotnet pack .\Source\SapientGuardian.MySql.Data -o .\artifacts\SapientGuardian.MySql.Data -c Release
 artifacts:
 - path: 'artifacts\**\*.nupkg'

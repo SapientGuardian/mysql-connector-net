@@ -1,5 +1,5 @@
 {
-  "version": "6.9.8-rc2-002",
+  "version": "6.9.8-rc2-003",
   "description": "MySQL client Library targting netstandard 1.5",
   "authors": [ "Oracle", "SapientGuardian" ],
   "buildOptions": {
