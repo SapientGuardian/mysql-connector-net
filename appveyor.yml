@@ -1,0 +1,9 @@
+version: 6.9.{build}
+image: Visual Studio 2015
+build_script:
+- cmd: >-
+    dotnet restore -v Warning
+
+    dotnet pack .\Source\MySql.Data -o .\artifacts\MySql.Data -c Release
+artifacts:
+- path: 'artifacts\**\*.nupkg'
