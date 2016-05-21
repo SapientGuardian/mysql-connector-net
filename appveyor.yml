@@ -1,4 +1,4 @@
-version: 6.9.{build}
+version: 6.9.8-rc2-{build}
 image: Visual Studio 2015
 build_script:
 - cmd: >-
@@ -10,8 +10,8 @@ artifacts:
 deploy:
   provider: NuGet
   api_key:
-    secure: aghuFgaUWlrXniLlOqTHNYg6hVzcc6ZNz5qPixX8zHI=
+    secure: 7nX5a7V6wWbtPSJ6bQSU9BRZwJEdn70w0Ydlf5fuk44Gjk9BVgxnYK6u8MNzT2yA
   artifact: /.*\.nupkg/
   on:
-    branch: release
+    branch: 6.9_netstandard_1.5
     appveyor_repo_tag: true
