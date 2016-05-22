@@ -27,7 +27,9 @@ using System.Data;
 using System.Data.Common;
 using System.Drawing;
 using System.Security;
+#if !NETSTANDARD1_3
 using System.Security.Permissions;
+#endif
 
 namespace MySql.Data.MySqlClient
 {
@@ -36,6 +38,7 @@ namespace MySql.Data.MySqlClient
   [ToolboxItem(true)]
   public sealed partial class MySqlConnection : DbConnection, ICloneable
   {
+#if !NETSTANDARD1_3
     /// <summary>
     /// Returns schema information for the data source of this <see cref="DbConnection"/>. 
     /// </summary>
@@ -76,7 +79,7 @@ namespace MySql.Data.MySqlClient
       MySqlSchemaCollection c = schemaProvider.GetSchema(collectionName, restrictions);
       return c.AsDataTable();
     }
-
+#endif
     protected override DbTransaction BeginDbTransaction(IsolationLevel isolationLevel)
     {
       if (isolationLevel == IsolationLevel.Unspecified)
@@ -89,7 +92,7 @@ namespace MySql.Data.MySqlClient
       return CreateCommand();
     }
 
-#if !CF
+#if !CF && !NETSTANDARD1_3
     partial void AssertPermissions()
     {
       // Security Asserts can only be done when the assemblies 

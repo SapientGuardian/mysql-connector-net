@@ -22,7 +22,7 @@
 
 using System;
 using System.ComponentModel;
-#if !CF
+#if !CF && !NETSTANDARD1_3
 using System.ComponentModel.Design.Serialization;
 #endif
 using System.Data;
@@ -33,7 +33,7 @@ using ParameterDirection = System.Data.ParameterDirection;
 
 namespace MySql.Data.MySqlClient
 {
-#if !CF
+#if !CF && !NETSTANDARD1_3
   [TypeConverter(typeof(MySqlParameterConverter))]
 #endif
   public sealed partial class MySqlParameter : DbParameter, IDataParameter, IDbDataParameter
@@ -52,7 +52,11 @@ namespace MySql.Data.MySqlClient
       Size = size;
       Direction = ParameterDirection.Input;
       SourceColumn = sourceColumn;
+#if NETSTANDARD1_3
+      SourceVersion = DataRowVersion.Default;
+#else
       SourceVersion = DataRowVersion.Current;
+#endif
     }
 
     /// <summary>
@@ -94,7 +98,11 @@ namespace MySql.Data.MySqlClient
 
     partial void Init()
     {
+#if NETSTANDARD1_3
+      SourceVersion = DataRowVersion.Default;
+#else
       SourceVersion = DataRowVersion.Current;
+#endif
       Direction = ParameterDirection.Input;
     }
 
@@ -102,8 +110,11 @@ namespace MySql.Data.MySqlClient
     /// Gets or sets the <see cref="DataRowVersion"/> to use when loading <see cref="Value"/>.
     /// </summary>
     [Category("Data")]
+#if NETSTANDARD1_3
+    public DataRowVersion SourceVersion { get; set; }
+#else
     public override DataRowVersion SourceVersion { get; set; }
-
+#endif
     /// <summary>
     /// Gets or sets the name of the source column that is mapped to the <see cref="DataSet"/> and used for loading or returning the <see cref="Value"/>.
     /// </summary>
@@ -304,7 +315,7 @@ namespace MySql.Data.MySqlClient
     }
   }
 
-#if !CF
+#if !CF && !NETSTANDARD1_3
   internal class MySqlParameterConverter : TypeConverter
   {
 

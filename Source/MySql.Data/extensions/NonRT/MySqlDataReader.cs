@@ -65,7 +65,12 @@ namespace MySql.Data.MySqlClient
     /// Returns a DataTable that describes the column metadata of the MySqlDataReader.
     /// </summary>
     /// <returns></returns>
+#if !NETSTANDARD1_3
+#if NETSTANDARD1_3
+    public DataTable GetSchemaTable()
+#else
     public override DataTable GetSchemaTable()
+#endif
     {
       // Only Results from SQL SELECT Queries 
       // get a DataTable for schema of the result
@@ -132,14 +137,22 @@ namespace MySql.Data.MySqlClient
 
       return dataTableSchema;
     }
+#endif
 
     /// <summary>
     /// Returns an <see cref="IEnumerator"/> that iterates through the <see cref="MySqlDataReader"/>. 
     /// </summary>
     /// <returns></returns>
+#if !NETSTANDARD1_3
     public override IEnumerator GetEnumerator()
     {
       return new DbEnumerator(this, (commandBehavior & CommandBehavior.CloseConnection) != 0);
     }
-  }
+#else
+    public override IEnumerator GetEnumerator()
+    {
+        throw new NotImplementedException();
+    }
+#endif
+    }
 }

@@ -266,7 +266,7 @@ namespace MySql.Data.MySqlClient
       set { baseStream.WriteTimeout = value; }
     }
 
-#if RT || NETSTANDARD1_5
+#if RT || NETSTANDARD1_3
     public void Close()
 #else
     public override void Close()
@@ -275,7 +275,7 @@ namespace MySql.Data.MySqlClient
       if (isClosed)
         return;
       isClosed = true;
-#if !RT
+#if !RT && !NETSTANDARD1_3
       baseStream.Close();
 #endif
 #if !CF

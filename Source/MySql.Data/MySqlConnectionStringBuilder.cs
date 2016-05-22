@@ -119,7 +119,7 @@ namespace MySql.Data.MySqlClient
       options.Add(new MySqlConnectionStringOption("integratedsecurity", "integrated security", typeof(bool), false, false,
         delegate(MySqlConnectionStringBuilder msb, MySqlConnectionStringOption sender, object value)
         {
-          #if NETSTANDARD1_5
+          #if NETSTANDARD1_3
           throw new MySqlException("IntegratedSecurity is not supported");
           #else
           if (!MySql.Data.Common.Platform.IsWindows())
@@ -503,7 +503,7 @@ namespace MySql.Data.MySqlClient
       get { return (bool)values["integratedsecurity"]; }
       set
       {
-        #if NETSTANDARD1_5
+        #if NETSTANDARD1_3
         throw new MySqlException("IntegratedSecurity is not supported");
         #else
         if (!MySql.Data.Common.Platform.IsWindows())
@@ -1222,7 +1222,7 @@ namespace MySql.Data.MySqlClient
 #endif
 
       object objValue;
-#if RT || NETSTANDARD1_5
+#if RT || NETSTANDARD1_3
       Type baseType = BaseType.GetTypeInfo().BaseType;
 #else
       Type baseType = BaseType.BaseType;
