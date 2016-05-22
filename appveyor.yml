@@ -15,5 +15,5 @@ deploy:
     secure: 7nX5a7V6wWbtPSJ6bQSU9BRZwJEdn70w0Ydlf5fuk44Gjk9BVgxnYK6u8MNzT2yA
   artifact: /.*\.nupkg/
   on:
-    branch: 6.9_netstandard_1.5
+    branch: 6.9_netstandard
     appveyor_repo_tag: true
