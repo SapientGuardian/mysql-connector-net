@@ -4,6 +4,8 @@
 
 [![Build status](https://ci.appveyor.com/api/projects/status/ve9qdbrktb29hs9w?svg=true)](https://ci.appveyor.com/project/SapientGuardian/mysql-connector-net-netstandard1-5)
 
+[NuGet Package](https://www.nuget.org/packages/SapientGuardian.MySql.Data/)
+
 Original README:
 
 This is a release of MySQL Connector/Net, Oracle's dual-
