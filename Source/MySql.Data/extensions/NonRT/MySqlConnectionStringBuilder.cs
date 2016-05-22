@@ -25,7 +25,11 @@ using System.Data.Common;
 
 namespace MySql.Data.MySqlClient
 {
-  public sealed partial class MySqlConnectionStringBuilder : DbConnectionStringBuilder
-  {
-  }
+#if NETSTANDARD1_3
+    public sealed partial class MySqlConnectionStringBuilder : System.Data.Common.DbConnectionStringBuilder
+#else
+    public sealed partial class MySqlConnectionStringBuilder : DbConnectionStringBuilder
+#endif
+    {
+    }
 }

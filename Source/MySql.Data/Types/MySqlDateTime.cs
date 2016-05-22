@@ -463,7 +463,7 @@ namespace MySql.Data.Types
         return dateString;
 
       DateTime dt = new DateTime(1, 2, 3, hour, minute, second).AddTicks(microsecond * 10);
-      dateString = String.Format("{0} {1}", dateString, dt.ToLongTimeString());
+      dateString = String.Format("{0} {1}", dateString, dt.ToString("T"));
       return dateString;
     }
 

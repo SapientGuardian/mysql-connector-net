@@ -158,7 +158,11 @@ namespace MySql.Data.MySqlClient
     /// Gets a value that indicates whether the <see cref="MySqlParameterCollection"/>
     /// has a fixed size. 
     /// </summary>
+#if NETSTANDARD1_3
+    public bool IsFixedSize
+#else
     public override bool IsFixedSize
+#endif
     {
       get { return (items as IList).IsFixedSize; }
     }
@@ -167,7 +171,11 @@ namespace MySql.Data.MySqlClient
     /// Gets a value that indicates whether the <see cref="MySqlParameterCollection"/>
     /// is read-only. 
     /// </summary>
+#if NETSTANDARD1_3
+    public bool IsReadOnly
+#else
     public override bool IsReadOnly
+#endif
     {
       get { return (items as IList).IsReadOnly; }
     }
@@ -176,7 +184,11 @@ namespace MySql.Data.MySqlClient
     /// Gets a value that indicates whether the <see cref="MySqlParameterCollection"/>
     /// is synchronized. 
     /// </summary>
+#if NETSTANDARD1_3
+    public bool IsSynchronized
+#else
     public override bool IsSynchronized
+#endif
     {
       get { return (items as IList).IsSynchronized; }
     }

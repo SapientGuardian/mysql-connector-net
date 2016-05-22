@@ -64,7 +64,7 @@ namespace MySql.Data.MySqlClient
         {
             get { return qaEnabled; }
         }
-
+#if !NETSTANDARD1_3
         public static void EnableQueryAnalyzer(string host, int postInterval)
         {
             if (qaEnabled) return;
@@ -77,7 +77,7 @@ namespace MySql.Data.MySqlClient
             source.Listeners.Add(l);
             Switch.Level = SourceLevels.All;
         }
-
+#endif
         public static void DisableQueryAnalyzer()
         {
             qaEnabled = false;

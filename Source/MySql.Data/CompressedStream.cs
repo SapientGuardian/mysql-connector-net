@@ -86,7 +86,7 @@ namespace MySql.Data.MySqlClient
 
     #endregion
 
-#if RT || NETSTANDARD1_5
+#if RT || NETSTANDARD1_3
     public void Close()
     {
       base.Dispose();
@@ -95,7 +95,12 @@ namespace MySql.Data.MySqlClient
     {
       base.Close();
 #endif
-      baseStream.Close();
+
+#if NETSTANDARD1_3
+        baseStream.Dispose();
+#else
+        baseStream.Close();
+#endif
 #if !CF
       cache.Dispose();
 #else

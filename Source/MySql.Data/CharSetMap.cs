@@ -69,9 +69,14 @@ namespace MySql.Data.MySqlClient
       try
       {
         CharacterSet cs = GetCharacterSet(version, CharSetName);
+        //Throws argument error rc2
         return Encoding.GetEncoding(cs.name);
       }
       catch (NotSupportedException)
+      {
+        return Encoding.GetEncoding("utf-8");
+      }
+      catch (Exception)
       {
         return Encoding.GetEncoding("utf-8");
       }

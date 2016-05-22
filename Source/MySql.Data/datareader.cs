@@ -74,7 +74,7 @@ namespace MySql.Data.MySqlClient
       affectedRows = -1;
       this.statement = statement;
 
-#if !RT && !NETSTANDARD1_5
+#if !RT && !NETSTANDARD1_3
       if (cmd.CommandType == CommandType.StoredProcedure 
         && cmd.UpdatedRowSource == UpdateRowSource.FirstReturnedRecord
       )
@@ -175,12 +175,16 @@ namespace MySql.Data.MySqlClient
       get { return this[GetOrdinal(name)]; }
     }
 
-    #endregion
+        #endregion
 
-    /// <summary>
-    /// Closes the MySqlDataReader object.
-    /// </summary>
+        /// <summary>
+        /// Closes the MySqlDataReader object.
+        /// </summary>
+#if NETSTANDARD1_3
+    public void Close()
+ #else
     public override void Close()
+#endif
     {
       if (!isOpen) return;
 
@@ -254,7 +258,7 @@ namespace MySql.Data.MySqlClient
       isOpen = false;
     }
 
-    #region TypeSafe Accessors
+#region TypeSafe Accessors
 
     /// <summary>
     /// Gets the value of the specified column as a Boolean.
@@ -802,9 +806,10 @@ namespace MySql.Data.MySqlClient
     }
 
 
-    #endregion
+#endregion
 
-#if !RT && !NETSTANDARD1_5
+//removed here
+#if !RT
     IDataReader IDataRecord.GetData(int i)
     {
       return base.GetData(i);
@@ -949,7 +954,7 @@ namespace MySql.Data.MySqlClient
       IMySqlValue v = resultSet[index];
 
       if (checkNull && v.IsNull)
-#if RT || NETSTANDARD1_5
+#if RT || NETSTANDARD1_3
         throw new MySqlNullValueException();
 #else
         throw new System.Data.SqlTypes.SqlNullValueException();
@@ -1044,11 +1049,11 @@ namespace MySql.Data.MySqlClient
       }
     }
 
-    #region Destructor
+#region Destructor
     ~MySqlDataReader()
     {
       Dispose(false);
     }
-    #endregion
+#endregion
   }
 }

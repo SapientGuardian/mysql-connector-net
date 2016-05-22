@@ -20,12 +20,14 @@
 // with this program; if not, write to the Free Software Foundation, Inc., 
 // 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
 
-#if !PocketPC && !NETSTANDARD1_5
+#if !PocketPC
 
 using System.Data.Common;
 using System;
 using System.Reflection;
+#if !NETSTANDARD1_3
 using System.Security.Permissions;
+#endif
 using System.Security;
 
 namespace MySql.Data.MySqlClient
@@ -33,8 +35,10 @@ namespace MySql.Data.MySqlClient
   /// <summary>
   /// DBProviderFactory implementation for MysqlClient.
   /// </summary>
-  [ReflectionPermission(SecurityAction.Assert, MemberAccess = true)]  
-  public sealed class MySqlClientFactory : DbProviderFactory, IServiceProvider
+#if !NETSTANDARD1_3
+  [ReflectionPermission(SecurityAction.Assert, MemberAccess = true)]
+#endif
+    public sealed class MySqlClientFactory : DbProviderFactory, IServiceProvider
   {
     /// <summary>
     /// Gets an instance of the <see cref="MySqlClientFactory"/>. 
@@ -44,6 +48,7 @@ namespace MySql.Data.MySqlClient
     private Type dbServicesType;
     private FieldInfo mySqlDbProviderServicesInstance;
 
+#if !NETSTANDARD1_3
     /// <summary>
     /// Returns a strongly typed <see cref="DbCommandBuilder"/> instance. 
     /// </summary>
@@ -52,7 +57,7 @@ namespace MySql.Data.MySqlClient
     {
       return new MySqlCommandBuilder();
     }
-
+#endif
     /// <summary>
     /// Returns a strongly typed <see cref="DbCommand"/> instance. 
     /// </summary>
@@ -71,6 +76,7 @@ namespace MySql.Data.MySqlClient
       return new MySqlConnection();
     }
 
+#if !NETSTANDARD1_3
     /// <summary>
     /// Returns a strongly typed <see cref="DbDataAdapter"/> instance. 
     /// </summary>
@@ -79,7 +85,7 @@ namespace MySql.Data.MySqlClient
     {
       return new MySqlDataAdapter();
     }
-
+#endif
     /// <summary>
     /// Returns a strongly typed <see cref="DbParameter"/> instance. 
     /// </summary>
@@ -93,11 +99,16 @@ namespace MySql.Data.MySqlClient
     /// Returns a strongly typed <see cref="DbConnectionStringBuilder"/> instance. 
     /// </summary>
     /// <returns>A new strongly typed instance of <b>DbConnectionStringBuilder</b>.</returns>
+#if NETSTANDARD1_3
+    public override System.Data.Common.DbConnectionStringBuilder CreateConnectionStringBuilder()
+#else
     public override DbConnectionStringBuilder CreateConnectionStringBuilder()
+#endif
     {
       return new MySqlConnectionStringBuilder();
     }
 
+#if !NETSTANDARD1_3
     /// <summary>
     /// Returns true if a <b>MySqlDataSourceEnumerator</b> can be created; 
     /// otherwise false. 
@@ -106,8 +117,8 @@ namespace MySql.Data.MySqlClient
     {
       get { return false; }
     }
-
-    #region IServiceProvider Members
+#endif
+#region IServiceProvider Members
 
     /// <summary>
     /// Provide a simple caching layer
@@ -135,7 +146,7 @@ namespace MySql.Data.MySqlClient
       {
         if (mySqlDbProviderServicesInstance == null)
         {
-          string fullName = Assembly.GetExecutingAssembly().FullName;
+          string fullName = default(Assembly).FullName;
           string assemblyName = fullName.Replace("MySql.Data", "MySql.Data.Entity");
           string assemblyEf5Name = fullName.Replace("MySql.Data", "MySql.Data.Entity.EF5");
           fullName = String.Format("MySql.Data.MySqlClient.MySqlProviderServices, {0}", assemblyEf5Name);
@@ -165,7 +176,7 @@ namespace MySql.Data.MySqlClient
       return MySqlDbProviderServicesInstance.GetValue(null);
     }
 
-    #endregion
+#endregion
   }
 }
 
