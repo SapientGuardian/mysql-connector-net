@@ -2,7 +2,8 @@
 
 ##This is a MySQL client Library targeting netstandard 1.3. It is a fork of the official Oracle MySQL Connector/Net library.
 
-[![Build status](https://ci.appveyor.com/api/projects/status/ve9qdbrktb29hs9w?svg=true)](https://ci.appveyor.com/project/SapientGuardian/mysql-connector-net-netstandard1-5)
+[![Windows Build status](https://ci.appveyor.com/api/projects/status/ve9qdbrktb29hs9w?svg=true)](https://ci.appveyor.com/project/SapientGuardian/mysql-connector-net-netstandard1-5)
+[![Linux/OSX Build Status](https://travis-ci.org/SapientGuardian/mysql-connector-net-netstandard.png)](https://travis-ci.org/SapientGuardian/mysql-connector-net-netstandard)
 
 [NuGet Package](https://www.nuget.org/packages/SapientGuardian.MySql.Data/)
 
