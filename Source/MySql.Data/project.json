@@ -1,5 +1,5 @@
 {
-  "version": "6.9.8-rc2-004",
+  "version": "6.9.8-rc2-005",
   "description": "MySQL client Library targeting netstandard 1.3",
   "authors": [ "Oracle", "SapientGuardian", "ebyte23" ],
   "buildOptions": {
@@ -13,7 +13,8 @@
         "extensions\\RT",
         "Replication"
       ]
-    }
+    },
+    "embed": "Properties\\keywords.txt"
   },
   "packOptions": {
     "tags": [ "coreclr", "dnxcore50", "netstandard", "netcore", "mysql" ],
