@@ -1,6 +1,6 @@
 #MySQL Connector/Net 6.x
 
-##This is a MySQL client Library targeting netstandard 1.3. It is a fork of the official Oracle MySQL Connector/Net library.
+##This is a MySQL client library targeting netstandard 1.3. It is a fork of the official Oracle MySQL Connector/Net library.
 
 [![Windows Build status](https://ci.appveyor.com/api/projects/status/ve9qdbrktb29hs9w?svg=true)](https://ci.appveyor.com/project/SapientGuardian/mysql-connector-net-netstandard1-5)<br />
 [![Linux/OSX Build Status](https://travis-ci.org/SapientGuardian/mysql-connector-net-netstandard.png)](https://travis-ci.org/SapientGuardian/mysql-connector-net-netstandard)<br />

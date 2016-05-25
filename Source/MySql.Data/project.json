@@ -1,6 +1,6 @@
 {
   "version": "6.9.8-rc2-005",
-  "description": "MySQL client Library targeting netstandard 1.3",
+  "description": "MySQL client library targeting netstandard 1.3",
   "authors": [ "Oracle", "SapientGuardian", "ebyte23" ],
   "buildOptions": {
     "emitEntryPoint": false,
