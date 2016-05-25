@@ -13,7 +13,8 @@
         "extensions\\RT",
         "Replication"
       ]
-    }
+    },
+    "embed": "Properties\\keywords.txt"
   },
   "packOptions": {
     "tags": [ "coreclr", "dnxcore50", "netstandard", "netcore", "mysql" ],

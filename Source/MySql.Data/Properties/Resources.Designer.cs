@@ -8,6 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.IO;
+using System.Reflection;
+
 namespace MySql.Data.MySqlClient.Properties
 {
     using System;
@@ -615,7 +618,19 @@ namespace MySql.Data.MySqlClient.Properties
         {
             get
             {
-                return "keywords";
+                return keywordsResource.Value;
+            }
+        }
+
+        private static Lazy<string> keywordsResource = new Lazy<string>(LoadKeywords);
+
+        private static string LoadKeywords()
+        {
+            var assembly = typeof(Resources).GetTypeInfo().Assembly;
+            var resourceStream = assembly.GetManifestResourceStream("MySql.Data.Properties.keywords.txt");
+            using (var reader = new StreamReader(resourceStream, System.Text.Encoding.UTF8))
+            {
+                return reader.ReadToEnd();
             }
         }
 
