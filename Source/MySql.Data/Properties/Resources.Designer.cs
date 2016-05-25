@@ -627,7 +627,7 @@ namespace MySql.Data.MySqlClient.Properties
         private static string LoadKeywords()
         {
             var assembly = typeof(Resources).GetTypeInfo().Assembly;
-            var resourceStream = assembly.GetManifestResourceStream("MySql.Data.Properties.keywords.txt");
+            var resourceStream = assembly.GetManifestResourceStream($"{assembly.GetName().Name}.Properties.keywords.txt");
             using (var reader = new StreamReader(resourceStream, System.Text.Encoding.UTF8))
             {
                 return reader.ReadToEnd();
