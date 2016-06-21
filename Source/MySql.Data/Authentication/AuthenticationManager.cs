@@ -36,17 +36,19 @@ namespace MySql.Data.MySqlClient.Authentication
       {
         plugins["mysql_native_password"] = new PluginInfo("MySql.Data.MySqlClient.Authentication.MySqlNativePasswordPlugin");
         plugins["sha256_password"] = new PluginInfo("MySql.Data.MySqlClient.Authentication.Sha256AuthenticationPlugin");
-#if !CF && !RT && !NETSTANDARD1_3
+#if !CF && !RT
         plugins["authentication_windows_client"] = new PluginInfo("MySql.Data.MySqlClient.Authentication.MySqlWindowsAuthenticationPlugin");
+#if !NETSTANDARD1_3
         if (MySqlConfiguration.Settings != null && MySqlConfiguration.Settings.AuthenticationPlugins != null)
         {
           foreach (AuthenticationPluginConfigurationElement e in MySqlConfiguration.Settings.AuthenticationPlugins)
             plugins[e.Name] = new PluginInfo(e.Type);
         }
 #endif
-      }
+#endif
+        }
 
-      public static MySqlAuthenticationPlugin GetPlugin(string method)
+        public static MySqlAuthenticationPlugin GetPlugin(string method)
       {
         if (!plugins.ContainsKey(method))
           throw new MySqlException(String.Format(Resources.AuthenticationMethodNotSupported, method));
