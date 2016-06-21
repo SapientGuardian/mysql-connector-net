@@ -24,7 +24,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Security;
 using System.Reflection;
+using System.Security.Authentication;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -81,5 +84,13 @@ namespace MySql.Data.MySqlClient
     {
       return type.GetRuntimeProperties().ToArray();
     }
-  }
+
+#if NETSTANDARD1_3
+    public static void AuthenticateAsClient(this SslStream ss, string targetHost, X509CertificateCollection clientCertificates, SslProtocols enabledSslProtocols, bool checkCertificateRevocation)
+    {
+        ss.AuthenticateAsClientAsync(targetHost, clientCertificates, enabledSslProtocols, checkCertificateRevocation).Wait();
+    }
+
+#endif
+    }
 }

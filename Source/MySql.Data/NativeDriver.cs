@@ -31,6 +31,9 @@ using System.Text;
 using MySql.Data.MySqlClient.Authentication;
 using System.Reflection;
 using System.ComponentModel;
+using System.Security.Cryptography.X509Certificates;
+using System.Net.Security;
+using System.Security.Authentication;
 #if RT || NETSTANDARD1_3
 using System.Linq;
 #endif
@@ -195,16 +198,16 @@ namespace MySql.Data.MySqlClient
       try
       {
 #if NETSTANDARD1_3
-         baseStream = StreamCreator.GetStream(Settings).Result;
+            baseStream = StreamCreator.GetStream(Settings).Result;
 #else
-         baseStream = await StreamCreator.GetStream(Settings);
+            baseStream = await StreamCreator.GetStream(Settings);
 #endif
 #if !CF && !RT && !NETSTANDARD1_3
          if (Settings.IncludeSecurityAsserts)
             MySqlSecurityPermission.CreatePermissionSet(false).Assert();
 #endif
-      }
-      catch (System.Security.SecurityException)
+            }
+            catch (System.Security.SecurityException)
       {
         throw;
       }
@@ -277,7 +280,7 @@ namespace MySql.Data.MySqlClient
       packet.WriteByte(33); //character set utf-8
       packet.Write(new byte[23]);
 
-#if !CF && !RT && !NETSTANDARD1_3
+#if !CF && !RT
       if ((serverCaps & ClientFlags.SSL) == 0)
       {
         if ((Settings.SslMode != MySqlSslMode.None)
@@ -322,7 +325,7 @@ namespace MySql.Data.MySqlClient
       stream.MaxBlockSize = maxSinglePacket;
     }
 
-#if !CF && !RT && !NETSTANDARD1_3
+#if !CF && !RT
 
 #region SSL
 
