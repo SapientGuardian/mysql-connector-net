@@ -47,11 +47,10 @@ namespace MySql.Data.MySqlClient.Authentication
     protected override void CheckConstraints()
     {
       string platform = String.Empty;
-#if !RT && !NETSTANDARD1_3
-      int p = (int)Environment.OSVersion.Platform;
-      if ((p == 4) || (p == 128))
+#if !RT
+     if(RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
         platform = "Unix";
-      else if (Environment.OSVersion.Platform == PlatformID.MacOSX) 
+      else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX)) 
         platform = "Mac OS/X";
 
       if (!String.IsNullOrEmpty(platform))
