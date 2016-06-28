@@ -26,11 +26,12 @@ using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Reflection;
+using System.Security;
 using System.Threading.Tasks;
 
 namespace MySql.Data.Common
-{
-  internal class MyNetworkStream : NetworkStream
+{    
+    internal class MyNetworkStream : NetworkStream
   {
     /// <summary>
     /// Wrapper around NetworkStream.
@@ -256,7 +257,7 @@ namespace MySql.Data.Common
       return ep;
     }
 #endif
-
+    [SecuritySafeCritical]
     private static MyNetworkStream CreateSocketStream(MySqlConnectionStringBuilder settings, IPAddress ip, bool unix)
     {
       EndPoint endPoint;
