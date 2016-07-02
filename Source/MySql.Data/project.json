@@ -1,5 +1,5 @@
 {
-  "version": "6.9.810",
+  "version": "6.9.811",
   "description": "MySQL client library targeting netstandard 1.3",
   "authors": [ "Oracle", "SapientGuardian", "ebyte23" ],
   "buildOptions": {
