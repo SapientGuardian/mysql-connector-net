@@ -192,16 +192,16 @@ namespace MySql.Data.MySqlClient
       stream.Encoding = Encoding;
     }
 
-    public async void Open()
+    public void Open()
     {
       // connect to one of our specified hosts
       try
       {
-#if NETSTANDARD1_3
-            baseStream = StreamCreator.GetStream(Settings).Result;
-#else
-            baseStream = await StreamCreator.GetStream(Settings);
-#endif
+
+        var streamTask = StreamCreator.GetStream(Settings);
+        streamTask.Wait();
+        baseStream = streamTask.Result;
+
 #if !CF && !RT && !NETSTANDARD1_3
          if (Settings.IncludeSecurityAsserts)
             MySqlSecurityPermission.CreatePermissionSet(false).Assert();
