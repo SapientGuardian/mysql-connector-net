@@ -4,7 +4,10 @@
   "dependencies": {
     "Microsoft.EntityFrameworkCore": "1.0.0",
     "Microsoft.EntityFrameworkCore.Relational": "1.0.0",
-    "MySql.Data": "6.9.*",
+    "MySql.Data": {
+      "version": "6.9.*",
+      "target": "project"
+    },
     "NETStandard.Library": "1.6.0"
   },
 
