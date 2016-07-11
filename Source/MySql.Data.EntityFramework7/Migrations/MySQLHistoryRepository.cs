@@ -52,12 +52,8 @@ namespace MySQL.Data.Entity.Migrations
 		}
 
 		protected override string ExistsSql
-		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-		}
+			=> "SELECT COUNT(*) FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '" +
+			   SqlGenerationHelper.EscapeLiteral(TableName) + "'";
 
 		public override string GetBeginIfExistsScript(string migrationId)
 		{
@@ -79,9 +75,7 @@ namespace MySQL.Data.Entity.Migrations
 			throw new NotImplementedException();
 		}
 
-		protected override bool InterpretExistsResult( object value)
-		{
-			throw new NotImplementedException();
-		}
+		protected override bool InterpretExistsResult(object value)
+			=> ((long)value != 0);
 	}
 }
