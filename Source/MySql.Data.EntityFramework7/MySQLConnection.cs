@@ -30,20 +30,20 @@ using MySql.Data.MySqlClient;
 
 namespace MySQL.Data.Entity
 {
-	public class MySQLConnection : RelationalConnection
+	public class MySQLRelationalConnection : RelationalConnection
 	{
-		public MySQLConnection(IDbContextOptions options, ILogger<MySQLConnection> logger)
+		public MySQLRelationalConnection(IDbContextOptions options, ILogger<MySQLRelationalConnection> logger)
 			: base(options, logger)
 		{ }
 
-		public MySQLConnection(IDbContextOptions options, ILogger logger)
+		public MySQLRelationalConnection(IDbContextOptions options, ILogger logger)
 			: base(options, logger)
 		{ }
 
 		protected override DbConnection CreateDbConnection()
 			=> new MySqlConnection(ConnectionString);
 		
-		public MySQLConnection CreateSystemConnection()
+		public MySQLRelationalConnection CreateSystemConnection()
 		{
 			var builder = new MySqlConnectionStringBuilder(ConnectionString);
 			builder.Database = "mysql";
@@ -51,7 +51,7 @@ namespace MySQL.Data.Entity
 			var optionsBuilder = new DbContextOptionsBuilder();
 			optionsBuilder.UseMySQL(builder.ConnectionString);
 
-			return new MySQLConnection(optionsBuilder.Options, Logger);
+			return new MySQLRelationalConnection(optionsBuilder.Options, Logger);
 		}
 	}
 }

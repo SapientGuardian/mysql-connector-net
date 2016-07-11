@@ -26,7 +26,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 
 namespace MySQL.Data.Entity
 {
-	public class MySQLSqlGenerator : RelationalSqlGenerationHelper
+	public class MySQLSqlGenerationHelper : RelationalSqlGenerationHelper
 	{
 		public override string DelimitIdentifier(string identifier)
 		{

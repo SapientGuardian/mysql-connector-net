@@ -24,13 +24,17 @@ using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore;
 
 namespace MySQL.Data.Entity
 {
 	public class MySQLTypeMapper : RelationalTypeMapper
 	{
+		private static int _medTextMaxLength = ((int)Math.Pow(2, 24) - 1) / 3;
+		private static int _textMaxLength = ((int)Math.Pow(2, 16) - 1) / 3;
+		private static int _longTextMaxLength = ((int)Math.Pow(2, 32) - 1) / 3;
+
 		private readonly RelationalTypeMapping _int = new RelationalTypeMapping("int", typeof(Int32));
 		private readonly RelationalTypeMapping _bigint = new RelationalTypeMapping("bigint", typeof(Int64));
 		private readonly RelationalTypeMapping _bit = new RelationalTypeMapping("bit", typeof(SByte));
@@ -43,7 +47,7 @@ namespace MySQL.Data.Entity
 		private readonly RelationalTypeMapping _Text = new RelationalTypeMapping("text", typeof(String));
 		private readonly RelationalTypeMapping _tinyText = new RelationalTypeMapping("tinytext", typeof(String));
 
-		private readonly RelationalTypeMapping _varchar = new RelationalTypeMapping("varchar(1000)", typeof(String), DbType.AnsiStringFixedLength, false, 1000);
+		private readonly RelationalTypeMapping _varchar = new RelationalTypeMapping("varchar(1000)", typeof(String), DbType.AnsiString, false, 1000);
 		private readonly RelationalTypeMapping _varbinary = new RelationalTypeMapping("blob", typeof(byte[]));
 		private readonly RelationalTypeMapping _datetime = new RelationalTypeMapping("datetime", typeof(DateTime));
 		private readonly RelationalTypeMapping _date = new RelationalTypeMapping("date", typeof(DateTime));
@@ -111,13 +115,26 @@ namespace MySQL.Data.Entity
 			=> haystack.IndexOf(needle, StringComparison.OrdinalIgnoreCase) >= 0;
 
 		protected override string GetColumnType(IProperty property)
-		{
-			throw new NotImplementedException();
-		}
+			=> property.MySQL().ColumnType;
 
-		public override RelationalTypeMapping FindMapping(string storeType)
+		protected override RelationalTypeMapping FindCustomMapping(IProperty property)
 		{
-			throw new NotImplementedException();
+			if(property.ClrType == typeof(String))
+			{
+				int maxLength = property.GetMaxLength() ?? 255;
+
+				if(maxLength <= _medTextMaxLength)
+					return new RelationalTypeMapping("varchar(" + maxLength + ")", typeof(String), DbType.AnsiString, false, maxLength);
+				if(maxLength <= _longTextMaxLength)
+					return _mediumText;
+
+				return _longText;
+			}
+
+			if(property.ClrType == typeof(byte[]))
+				return _varbinary;
+
+			return base.FindCustomMapping(property);
 		}
 	}
 }

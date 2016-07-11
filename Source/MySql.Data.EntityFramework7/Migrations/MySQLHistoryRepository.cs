@@ -33,7 +33,7 @@ namespace MySQL.Data.Entity.Migrations
 		public MySQLHistoryRepository(
 			IDatabaseCreator databaseCreator,
 			IRawSqlCommandBuilder sqlCommandBuilder,
-			MySQLConnection connection,
+			MySQLRelationalConnection connection,
 			IDbContextOptions options,
 			IMigrationsModelDiffer modelDiffer,
 			MySQLMigrationsSqlGenerator sqlGenerator,

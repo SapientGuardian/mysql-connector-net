@@ -35,13 +35,13 @@ namespace MySQL.Data.Entity
 {
 	public class MySQLDatabaseCreator : RelationalDatabaseCreator
 	{
-		private readonly MySQLConnection _connection;
+		private readonly MySQLRelationalConnection _connection;
 		private readonly IMigrationsSqlGenerator _sqlGenerator;
 		private readonly IMigrationCommandExecutor _commandExecutor;
 		private readonly IRawSqlCommandBuilder _commandBuilder;
 
 		public MySQLDatabaseCreator(
-			MySQLConnection cxn,
+			MySQLRelationalConnection cxn,
 			IMigrationsModelDiffer differ,
 			IMigrationsSqlGenerator generator,
 			IMigrationCommandExecutor executor,

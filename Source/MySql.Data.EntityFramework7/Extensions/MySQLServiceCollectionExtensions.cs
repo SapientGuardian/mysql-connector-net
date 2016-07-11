@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using MySql.Data.EntityFramework7.Query;
 using MySQL.Data.Entity;
 using MySQL.Data.Entity.Metadata;
 using MySQL.Data.Entity.Migrations;
@@ -21,7 +22,7 @@ namespace Microsoft.Extensions.DependencyInjection
 				.AddSingleton<MySQLValueGeneratorCache>()
 				.AddSingleton<MySQLAnnotationProvider>()
 				.AddSingleton<MySQLTypeMapper>()
-				/*.AddSingleton<MySQLSqlGenerationHelper>()*/
+				.AddSingleton<MySQLSqlGenerationHelper>()
 				.AddSingleton<MySQLModelSource>()
 				.AddSingleton<MySQLMigrationsAnnotationProvider>()
 				.AddScoped<MySQLConventionSetBuilder>()
@@ -41,6 +42,6 @@ namespace Microsoft.Extensions.DependencyInjection
 			=> serviceCollection
 				.AddScoped<MySQLCompositeMemberTranslator>()
 				.AddScoped<MySQLCompositeMethodCallTranslator>()
-				/*.AddScoped<MySQLQuerySqlGeneratorFactory>()*/;
+				.AddScoped<MySQLQuerySqlGeneratorFactory>();
 	}
 }
