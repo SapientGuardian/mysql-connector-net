@@ -23,6 +23,7 @@
 
 
 using Microsoft.EntityFrameworkCore.Storage;
+using System.Text;
 
 namespace MySQL.Data.Entity
 {
@@ -31,7 +32,17 @@ namespace MySQL.Data.Entity
 		public override string DelimitIdentifier(string identifier)
 		{
 			ThrowIf.Argument.IsEmpty(identifier, "identifier");
-			return "`" + identifier + "`";
+
+			return "`" + EscapeIdentifier(identifier) + "`";
+		}
+
+		public override void DelimitIdentifier(StringBuilder builder, string identifier)
+		{
+			ThrowIf.Argument.IsEmpty(identifier, "identifier");
+
+			builder.Append('`');
+			EscapeIdentifier(builder, identifier);
+			builder.Append('`');
 		}
 	}
 }
