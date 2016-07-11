@@ -52,7 +52,7 @@ namespace MySQL.Data.Entity.Migrations
 		}
 
 		protected override string ExistsSql
-			=> "SELECT COUNT(*) FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '" +
+			=> "SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = '" +
 			   SqlGenerationHelper.EscapeLiteral(TableName) + "'";
 
 		public override string GetBeginIfExistsScript(string migrationId)

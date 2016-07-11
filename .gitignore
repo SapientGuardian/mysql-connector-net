@@ -202,3 +202,5 @@ Report
 /Source/MySql.Data/.vscode
 /Source/MySql.Data/bin
 /Source/MySql.Data/project.lock.json
+/Source/MySql.Data.EntityFramework7/bin
+/Source/MySql.Data.EntityFramework7/project.lock.json
