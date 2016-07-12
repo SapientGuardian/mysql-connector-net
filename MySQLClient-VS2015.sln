@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "MySql.Data", "Source\MySql.Data\MySql.Data.xproj", "{8517D716-06E2-4AE1-B7D9-00025389A2FE}"
 EndProject
@@ -9,6 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		global.json = global.json
 	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "MySql.Data.EntityFramework7", "Source\MySql.Data.EntityFramework7\MySql.Data.EntityFramework7.xproj", "{15C0EE41-32FB-47C6-BF46-42093672215A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,6 +22,10 @@ Global
 		{8517D716-06E2-4AE1-B7D9-00025389A2FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8517D716-06E2-4AE1-B7D9-00025389A2FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8517D716-06E2-4AE1-B7D9-00025389A2FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15C0EE41-32FB-47C6-BF46-42093672215A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15C0EE41-32FB-47C6-BF46-42093672215A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15C0EE41-32FB-47C6-BF46-42093672215A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15C0EE41-32FB-47C6-BF46-42093672215A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
