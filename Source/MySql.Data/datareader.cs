@@ -37,8 +37,8 @@ using System.Threading;
 namespace MySql.Data.MySqlClient
 {
   /// <include file='docs/MySqlDataReader.xml' path='docs/ClassSummary/*'/>
-  public sealed partial class MySqlDataReader : IDisposable
-  {
+  public sealed partial class MySqlDataReader : DbDataReader
+	{
     // The DataReader should always be open when returned to the user.
     private bool isOpen = true;
 
@@ -1035,14 +1035,10 @@ namespace MySql.Data.MySqlClient
       throw ex;
     }
 
-    public new void Dispose()
+    protected override void Dispose(bool disposing)
     {
-      Dispose(true);
-      GC.SuppressFinalize(this);
-    }
+      base.Dispose(disposing);
 
-    internal new void Dispose(bool disposing)
-    {
       if (disposing)
       {
         Close();
