@@ -193,7 +193,7 @@ namespace MySql.Data.MySqlClient
     public static Driver Create(MySqlConnectionStringBuilder settings)
     {
       Driver d = null;
-#if !CF && !RT && !NETSTANDARD1_3
+#if !CF && !RT
       try
       {
         if (MySqlTrace.QueryAnalysisEnabled || settings.Logging || settings.UseUsageAdvisor)
