@@ -28,6 +28,7 @@ using System.Text.RegularExpressions;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security;
 
 namespace MySql.Data.MySqlClient
 {
@@ -77,9 +78,10 @@ namespace MySql.Data.MySqlClient
     protected bool binaryOk;
     protected List<Type> typeConversions = new List<Type>();
 
-    #endregion
+        #endregion
 
-    public MySqlField(Driver driver)
+        [SecuritySafeCritical]
+        public MySqlField(Driver driver)
     {
       this.driver = driver;
       connVersion = driver.Version;
